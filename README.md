@@ -1,63 +1,25 @@
-# YieldQuant-Mobile
+# 结合轻量级麦穗检测模型和离线Android软件开发的田间小麦测产
 
-Chen Jiawei<sup>1,2</sup>, Li Qing<sup>3</sup>, Tan Qiaoxing<sup>1</sup>, Gui Shiquan<sup>1</sup>,Wang Xiao<sup>3</sup>,Yi Fujin<sup>4</sup>,Jiang Dong<sup>3</sup>,Zhou Ji<sup>1,5※</sup>
+陈佳伟<sup>1,2</sup>, 李庆<sup>3</sup>, 谭巧行<sup>1</sup>, 桂世全<sup>1</sup>, 王笑<sup>3</sup>, 易福金<sup>4</sup>, 姜东<sup>3</sup>, 周济<sup>1,5※</sup>
 
-<sup>1</sup>Academy for Advanced Interdisciplinary Studies/Plant Phenomics Research Center/Jiangsu Collaborative Innovation Center for Modern Crop Production co-sponsored by Province and Ministry, Nanjing Agricultural University, Nanjing 210095, China;
+<sup>1</sup>南京农业大学前沿交叉研究院/植物表型组学研究中心/江苏省现代作物生产省部共建协同创新中心，南京 210095;
 
-<sup>2</sup>College of Engineering, Nanjing Agricultural University, Nanjing 210095, China;
+<sup>2</sup> 南京农业大学工学院，南京 210095;
 
-<sup>3</sup>College of Agriculture, Nanjing Agricultural University, Nanjing 210095, China;
+<sup>3</sup>南京农业大学农学院，南京 210095;
 
-<sup>4</sup>College of Economics and Management, Nanjing Agricultural University, Nanjing 210095, China;
+<sup>4</sup>南京农业大学经济管理学院，南京 210095;
 
-<sup>5</sup>Data Sciences/Cambridge Crop Research/National Institute of Agricultural Botany, Cambridge CB3 0LE, UK
-## Overview
-In this release, we uploaded the latest version of CropQuant-3D, a graphical user interface (GUI, in .exe format) based analytic software that can be utilised to carry out 3D trait analysis on LiDAR-collected point cloud data in large-scale field phenotyping. The use of backpack LiDAR or other sources can acquire millions of 3D points to represent spatial features of crops. To effectively analyse these point clouds, CropQuant-3D was developed to extract plot-based phenotypic traits from large, complex point clouds with limited computing time and power. We combined a backpack LiDAR device and CropQuant-3D to quantify crop height, 3D canopy index (3DCI, an original 3D measurement of canopy variation), 3D canopy surface, canopy coverage and biomass estimation (i.e. 3DVI and 3DPI), in a case study examining the response of wheat varieties to three different levels of nitrogen fertilisation in field experiments. The combined solution can differentiate significant genotype and treatment effects on key performance-related morphological traits and structural variation in canopy, with strong correlations with conventional manual measurements. Hence, we believe that CropQuant-3D could be used for consistently quantifying key traits at a larger scale and more quickly than heretofore possible, which could be used as a reliable research tool and jointly developed with the plant research community for large-scale and multi-location field phenotyping in crop research and breeding activities. 
+<sup>5</sup>英国剑桥作物研究中心/英国国立农业植物研究所，剑桥 CB3 0LE，英国
+
+## 概述
+在本次发布中，我们上传了最新版本的“YieldQuant-Mobile" (YQ-M)，这是一个基于MobileNet-YOLOV4、迁移学习、Android SDK和SQLite的安卓分析软件，可以离线识别手机拍摄的麦穗数量。YQ-M中预先嵌入了小麦产量构成要素的历史数据库，在离线识别出手机拍摄的麦穗数量后，可结合历史数据库在田间产量预测和结果输出等功能。在一个案例中，测试了80个代表性小麦品种（共240个1平方米小区），使用YQ-M完成了这些品种的麦穗检测和小区测产研究，结果显示YQ-M的精确率、召回率、平均精确度和F1分数分别为84.33%，91.05%，91.96%和0.88。单位面积测产结果和实际产量的决定系数为0.839，案例研究表明YQ-M对麦穗识别精度高，在田间环境下测产结果和算法鲁棒性良好。此外，YQ-M开放了部署多种轻量级模型的端口，为实现多种作物产量预测、作物品类扩充和系统功能提升提供了开放式平台。因此，我们相信随着智能手机配置的不断提高，YQ-M可扩展至大部分小麦品种，为广大农业从业人员和科研人员提供在田间开展经济、便捷和可靠的产量量化分析的技术手段。
 
 
-## Install Python, Anaconda and Libraries
-If you wish to run CropQuant-3D from the code, you will need to set up Python on your system. 
-
-1. Install Python releases:
+## 安装"YieldQuant-Mobile" (YQ-M)
+如果您希望使用YQ-M，您需要下载YieldQuant-Mobile_v1.0.apk
+下载链接：https://github.com/The-Zhou-Lab/YieldQuant-Mobile/releases/latest
    
-   •	Read the beginner’s guide to Python if you are new to the language: 
-   https://wiki.python.org/moin/BeginnersGuide
-   
-   •	For Windows users, Python 3 release can be downloaded via: 
-   https://www.python.org/downloads/windows/
-   
-   •	Crop3D-Mobile only supports Python 3
+## 运行"YieldQuant-Mobile" (YQ-M)
 
-2. Install Anaconda Python distribution:
-   
-   •	Read the install instruction using the URL: https://docs.continuum.io/anaconda/install
-   
-   •	For Windows users, a detailed step-by-step installation guide can be found via: 
-   https://docs.continuum.io/anaconda/install/windows 
-   
-   •	An Anaconda Graphical installer can be found via: 
-   https://www.continuum.io/downloads
-
-   •	We recommend users install the latest Anaconda Python distribution
-
-3. Install packages:
-
-   • CropQuant-3D uses a number of 3rd-party libraries that you may need to add to your conda environment.
-   These include, but are not limited to:
-   
-       Laspy=1.7.0
-       Whitebox=1.3.0
-       GDAL=3.1.4
-       Rasterio=1.1.8
-       Open3d=0.11.2
-       mayavi=4.7.2
-       Scikit-image=0.17.2
-       Opencv-python=4.4.0.46
-       Matplotlib =3.3.3
-       Pandas=1.1.5
-       Numpy=1.19.4
-       Scipy=1.5.3
-   
-## Running CropQuant-3D
-
-Before using the software and source code, please see the CropQuant-3D user guide.pdf file on this repository. A compressed Windows (exe format, i.e. CropQuant-3D.zip) file can be downloaded from the release link as well.
+在使用YQ-M之前，请参阅此存储库中的YieldQuant-Mobile用户指南.pdf文件。
